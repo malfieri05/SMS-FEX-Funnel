@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900 font-sans;
+    font-family: 'Inter', 'Source Sans Pro', 'Montserrat', sans-serif;
+  }
+} 

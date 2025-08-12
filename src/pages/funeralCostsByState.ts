@@ -1,0 +1,61 @@
+// Average funeral costs by state (example data, can be expanded)
+// Source: National Funeral Directors Association, 2023 (public data, approximate)
+
+export interface FuneralCost {
+  state: string;
+  burial: [number, number]; // [min, max]
+  cremation: [number, number]; // [min, max]
+}
+
+export const funeralCostsByState: FuneralCost[] = [
+  { state: 'Alabama', burial: [7000, 9000], cremation: [4000, 6000] },
+  { state: 'Alaska', burial: [8000, 11000], cremation: [5000, 7000] },
+  { state: 'Arizona', burial: [7000, 9500], cremation: [4000, 6500] },
+  { state: 'Arkansas', burial: [6500, 8500], cremation: [3500, 5500] },
+  { state: 'California', burial: [9000, 13000], cremation: [6000, 9000] },
+  { state: 'Colorado', burial: [7500, 10000], cremation: [4500, 7000] },
+  { state: 'Connecticut', burial: [9000, 12000], cremation: [6000, 8500] },
+  { state: 'Delaware', burial: [8000, 10500], cremation: [5000, 7500] },
+  { state: 'Florida', burial: [7500, 10000], cremation: [4500, 7000] },
+  { state: 'Georgia', burial: [7000, 9500], cremation: [4000, 6500] },
+  { state: 'Hawaii', burial: [10000, 14000], cremation: [7000, 10000] },
+  { state: 'Idaho', burial: [7000, 9000], cremation: [4000, 6000] },
+  { state: 'Illinois', burial: [8000, 11000], cremation: [5000, 8000] },
+  { state: 'Indiana', burial: [7500, 10000], cremation: [4500, 7000] },
+  { state: 'Iowa', burial: [7000, 9500], cremation: [4000, 6500] },
+  { state: 'Kansas', burial: [7000, 9500], cremation: [4000, 6500] },
+  { state: 'Kentucky', burial: [7000, 9000], cremation: [4000, 6000] },
+  { state: 'Louisiana', burial: [7500, 10000], cremation: [4500, 7000] },
+  { state: 'Maine', burial: [8000, 10500], cremation: [5000, 7500] },
+  { state: 'Maryland', burial: [8500, 11000], cremation: [5500, 8000] },
+  { state: 'Massachusetts', burial: [9000, 12000], cremation: [6000, 8500] },
+  { state: 'Michigan', burial: [8000, 11000], cremation: [5000, 8000] },
+  { state: 'Minnesota', burial: [8000, 11000], cremation: [5000, 8000] },
+  { state: 'Mississippi', burial: [6500, 8500], cremation: [3500, 5500] },
+  { state: 'Missouri', burial: [7000, 9500], cremation: [4000, 6500] },
+  { state: 'Montana', burial: [7500, 10000], cremation: [4500, 7000] },
+  { state: 'Nebraska', burial: [7000, 9500], cremation: [4000, 6500] },
+  { state: 'Nevada', burial: [8000, 10500], cremation: [5000, 7500] },
+  { state: 'New Hampshire', burial: [8500, 11000], cremation: [5500, 8000] },
+  { state: 'New Jersey', burial: [9000, 12000], cremation: [6000, 8500] },
+  { state: 'New Mexico', burial: [7000, 9000], cremation: [4000, 6000] },
+  { state: 'New York', burial: [10000, 14000], cremation: [7000, 10000] },
+  { state: 'North Carolina', burial: [7500, 10000], cremation: [4500, 7000] },
+  { state: 'North Dakota', burial: [7000, 9500], cremation: [4000, 6500] },
+  { state: 'Ohio', burial: [8000, 11000], cremation: [5000, 8000] },
+  { state: 'Oklahoma', burial: [7000, 9500], cremation: [4000, 6500] },
+  { state: 'Oregon', burial: [8000, 10500], cremation: [5000, 7500] },
+  { state: 'Pennsylvania', burial: [8500, 11000], cremation: [5500, 8000] },
+  { state: 'Rhode Island', burial: [9000, 12000], cremation: [6000, 8500] },
+  { state: 'South Carolina', burial: [7500, 10000], cremation: [4500, 7000] },
+  { state: 'South Dakota', burial: [7000, 9500], cremation: [4000, 6500] },
+  { state: 'Tennessee', burial: [7000, 9500], cremation: [4000, 6500] },
+  { state: 'Texas', burial: [8000, 11000], cremation: [5000, 8000] },
+  { state: 'Utah', burial: [7000, 9000], cremation: [4000, 6000] },
+  { state: 'Vermont', burial: [8000, 10500], cremation: [5000, 7500] },
+  { state: 'Virginia', burial: [8000, 11000], cremation: [5000, 8000] },
+  { state: 'Washington', burial: [8500, 11000], cremation: [5500, 8000] },
+  { state: 'West Virginia', burial: [7000, 9000], cremation: [4000, 6000] },
+  { state: 'Wisconsin', burial: [8000, 11000], cremation: [5000, 8000] },
+  { state: 'Wyoming', burial: [7000, 9000], cremation: [4000, 6000] },
+]; 

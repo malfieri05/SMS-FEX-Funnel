@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Response Tester</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .response {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+        }
+        .success {
+            background-color: #d4edda;
+            border-left-color: #28a745;
+        }
+        .error {
+            background-color: #f8d7da;
+            border-left-color: #dc3545;
+        }
+        .step-info {
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .step-info h3 {
+            margin-top: 0;
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 Client Response Tester</h1>
+        
+        <div class="step-info">
+            <h3>Current Conversation Flow:</h3>
+            <p><strong>Step 1:</strong> State validation (e.g., "california")</p>
+            <p><strong>Step 2:</strong> Burial/Cremation preference ("1" for Burial, "2" for Cremation)</p>
+            <p><strong>Step 3:</strong> Tobacco use ("1" for Yes, "2" for No)</p>
+            <p><strong>Step 4:</strong> Oxygen/wheelchair ("1" for Yes, "2" for No)</p>
+            <p><strong>Step 5:</strong> Hospitalization ("1" for Yes, "2" for No)</p>
+            <p><strong>Step 6:</strong> Controlled conditions ("1" for Yes, "2" for No)</p>
+            <p><strong>Step 7:</strong> Serious conditions ("1" for Yes, "2" for No)</p>
+            <p><strong>Step 8:</strong> Final CTA ("1" for Call, "2" for Consultation, "3" for Questions)</p>
+        </div>
+
+        <form id="testForm">
+            <div class="form-group">
+                <label for="phoneNumber">Client Phone Number:</label>
+                <input type="text" id="phoneNumber" value="+15618189087" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Client Response:</label>
+                <input type="text" id="message" placeholder="Enter client's response (e.g., '1', '2', 'california')" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="expectedStep">Expected Current Step:</label>
+                <select id="expectedStep">
+                    <option value="1">Step 1 - State validation</option>
+                    <option value="2" selected>Step 2 - Burial/Cremation</option>
+                    <option value="3">Step 3 - Tobacco use</option>
+                    <option value="4">Step 4 - Oxygen/wheelchair</option>
+                    <option value="5">Step 5 - Hospitalization</option>
+                    <option value="6">Step 6 - Controlled conditions</option>
+                    <option value="7">Step 7 - Serious conditions</option>
+                    <option value="8">Step 8 - Final CTA</option>
+                </select>
+            </div>
+            
+            <button type="submit">🚀 Send Test Response</button>
+        </form>
+        
+        <div id="response" class="response" style="display: none;"></div>
+    </div>
+
+    <script>
+        document.getElementById('testForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const message = document.getElementById('message').value;
+            const expectedStep = document.getElementById('expectedStep').value;
+            const responseDiv = document.getElementById('response');
+            
+            responseDiv.style.display = 'block';
+            responseDiv.className = 'response';
+            responseDiv.innerHTML = '🔄 Sending test response...';
+            
+            try {
+                const response = await fetch('/sms', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `From=${phoneNumber}&Body=${message}`
+                });
+                
+                if (response.ok) {
+                    responseDiv.className = 'response success';
+                    responseDiv.innerHTML = `
+                        <h3>✅ Test Response Sent Successfully!</h3>
+                        <p><strong>Phone:</strong> ${phoneNumber}</p>
+                        <p><strong>Message:</strong> "${message}"</p>
+                        <p><strong>Expected Step:</strong> ${expectedStep}</p>
+                        <p><strong>Status:</strong> ${response.status} ${response.statusText}</p>
+                        <p>📱 Check the server logs to see the detailed processing!</p>
+                        <p>💡 Next: Check your iMessage to see the automated response.</p>
+                    `;
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+            } catch (error) {
+                responseDiv.className = 'response error';
+                responseDiv.innerHTML = `
+                    <h3>❌ Error Sending Test Response</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                    <p>Make sure the SMS server is running on port 3001.</p>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

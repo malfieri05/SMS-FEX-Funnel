@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: sms-funnel
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node sms-server-telnyx.cjs
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: DEMO_MODE
+        value: false
+      - key: TELNYX_API_KEY
+        sync: false
+      - key: TELNYX_PHONE_NUMBER
+        sync: false
